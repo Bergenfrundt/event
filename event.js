@@ -1,4 +1,5 @@
-function event(string, functions) {
+function event(string, functions, fallback) {
+	fallback = (typeof fallback === 'function') ? fallback : function () {};
 	// Selects options from  string
 	var options = string.match(/\[(.*?)\]/g);
 	// Looped for all options
@@ -18,5 +19,7 @@ function event(string, functions) {
 	}
 	if (index !== 'quit') {
 		functions[index]();
+	} else {
+		fallback();
 	}
 }
